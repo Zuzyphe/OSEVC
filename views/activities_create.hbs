@@ -1,0 +1,86 @@
+<h1 class="text-center">Créer une activité</h1>
+
+<div class="container mt-5">
+    <form action="/activities/create" method="POST" onsubmit="return activitiesCheck()">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="activitiesName" class="mb-2 fs-4">Nom de l'activité</label>
+                    <input type="text" id="activitiesName" name="activitiesName" class="form-control border-warning-subtle"
+                        aria-label="Nom de l'événement" aria-required="true">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="NameOrganiser" class="mb-2 fs-4">Créateur de l'activité</label>
+                    <input type="text" id="NameOrganiser" name="NameOrganiser" class="form-control border-warning-subtle"
+                        aria-label="Nom de l'organisateur'" aria-required="true">
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group col-4 mt-4">
+            <label for="taskId" class="mb-2 fs-4"><i class="bi bi-dice-5"></i> Choisissez une tâche</label>
+            <div class="dropdown">
+                <select id="taskId" name="TaskID" class="form-select border-warning-subtle" aria-label="Default select example">
+                    {{#each tasks}}
+                    <option value="{{id}}">{{task_name}}</option>
+                    {{/each}}
+                </select>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group col-4 mt-4">
+                <label for="imgTask" class="mb-2 fs-4"><i class="bi bi-image-fill"></i> Url de l'image</label>
+                <input type="text" id="imgTask" name="imgTask" class="form-control border-warning-subtle">
+            </div>
+        <div class="form-group mt-4">
+            <label for="activitiesDescription" class="mb-2 fs-4">Description de l'activité</label>
+            <textarea id="activitiesDescription" name="activitiesDescription" class="form-control border-warning-subtle" rows="4"
+                aria-label="Description de l'activité" aria-required="true"></textarea>
+        </div>
+        <div class="row">
+            <div class="form-group col-6 mt-5">
+                <label for="activitiesDate" class="mb-2 fs-4"> <i class="bi bi-calendar m-2"></i>Date de l'activité</label>
+                <input type="date" id="activitiesDate" name="activitiesDate" class="form-control border-warning-subtle"
+                    aria-label="Date de l'événement" aria-required="true">
+            </div>
+            <div class="form-group col-6 mt-5">
+                <label for="activitiesTime" class="mb-2 fs-4"> <i class="bi bi-watch"></i>Heure l'activité</label>
+                <input type="time" id="activitiesTime" name="activitiesTime" class="form-control border-warning-subtle"
+                    placeholder="Par exemple 16:00" aria-label="Heure de l'événement" aria-required="true">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-4 mt-4">
+                <label for="address" class="mb-2 fs-4"><i class="bi bi-geo-alt m-2"></i>Lieu de l'activité</label>
+                <input type="text" id="address" name="address" class="form-control border-warning-subtle"
+                    aria-label="Lieu de l'événement" aria-required="true">
+            </div>
+            <div class="form-group col-3 mx-auto mt-4">
+                <label for="playersNumber" class="mb-2 fs-4"><i class="bi bi-person-fill-add m-2"></i></i>Nombre de
+                    participants</label>
+                <input type="number" id="playersNumber" name="playersNumber" class="form-control border-warning-subtle"
+                    aria-label="Nombre de joueurs" aria-required="true">
+            </div>
+        </div>
+        {{#if errors}}
+        <div class="mb-3">
+            {{#each errors}}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{msg}} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+        {{#if error}}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{error}}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {{/if}}
+
+
+        <button type="submit" class="btn btn-warning mt-5 mb-2">Créer l'activité</button>
+    </form>
+</div>
+<script src="/js/activitiesCheck.js" defer></script>

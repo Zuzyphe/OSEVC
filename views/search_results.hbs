@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <h2 class="m-5">Vos résultats de recherche</h2> <br>
+    <h3 class="text-center">Il y a {{activityCount}} résultat(s) parmi les activités organisées :</h3>
+    <div class="row flex-row d-flex justify-content-center">
+        {{#each eventResults }}
+        <div class="col-sm-12 col-md-4 col-lg-3 mx-auto mt-2 mb-2">
+            <div class="card" style="width: 18rem;">
+                <img src="{{activities.imageUrl}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title blueFont">{{name}}</h5>
+                    <h6 class="card-title orangeFont">Le {{event_date}} à {{event_time}} pour {{nbr_participants}} participants
+                    </h6>
+                    <p class="card-text">{{description}}</p>
+                    <a href="/activities/read/{{id}}" class="btn btnOrange float-end">Voir l'activité'</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <h3 class="text-center">Il y a {{taskCount}} résultat(s) parmi les tâches déjà créés disponibles :</h3>
+    <div class="row flex-row d-flex justify-content-center">
+        {{#each taskResults }}
+        <div class="col-sm-12 col-md-4 col-lg-3 mx-auto mt-2 mb-2">
+            <div class="card" style="width: 18rem;">
+                
+                <div class="card-body">
+                    <h5 class="card-title">{{task_name}}</h5>
+                    <h6 class="card-title">{{nbr_participants}} participants</h6>
+                    <p class="card-text">{{task_desc}}</p>
+                    <a href="/task/read{{id}}" class="btn btnOrange">Voir la tâche</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>

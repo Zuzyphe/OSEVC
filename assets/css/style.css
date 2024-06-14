@@ -1,0 +1,288 @@
+main {
+    margin: 3em 0;
+}
+
+/* à consulter https://stackoverflow.com/questions/5181845/git-push-existing-repo-to-a-new-and-different-remote-repo-server */
+
+:root {
+
+    --bg-light: #F8F8F8;
+    --bg-light-grey: #fbf5f5;
+    --bg-grey: #c3c3c3;
+    --bg-orange: #ac3448;
+    --bg-orange-light: #ac3448bc;
+    --bg-darkblue: #606569;
+    --bg-darkred: #A30000;
+    --bg-green: #5CD451;
+    --bg-black: #222222;
+    --title-font: "Luckiest Guy", cursive;
+    --main-font: "Maven Pro", sans-serif;
+    --bg-gradient-base:rgb(172,52,72);
+    --bg-gradient: linear-gradient(131deg, rgba(172,52,72,1) 37%, rgba(0,163,147,1) 100%);
+    --bg-gradient-base-reverse:rgb(0,163,147);
+    --bg-gradient-reverse: linear-gradient(131deg, rgba(0,163,147,1) 0%, rgba(172,52,72,1) 90%);
+    --bg-gradient-base-orange: rgb(253,29,29);
+    /* background: linear-gradient(90deg, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%); */
+}
+
+.luckiest-guy-regular {
+    font-family: "Luckiest Guy", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* // <uniquifier>: Use a unique and descriptive class name
+  // <weight>: Use a value from 400 to 900 */
+  
+  .maven-pro {
+    font-family: "Maven Pro", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+/* // <uniquifier>: Use a unique and descriptive class name
+// <weight>: Use a value from 400 to 800 */
+
+.teachers {
+  font-family: "Teachers", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+    background-color: var(--bg-light);
+}
+
+h1 {
+    font-family: "Luckiest Guy", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    text-align: center;
+}
+
+h2 {
+    font-family: "Luckiest Guy", cursive;
+    text-align: center;
+}
+
+h3 {
+    margin: 20px 0;
+}
+
+.navStyle {
+    background-color: var(--bg-gradient-base); 
+    background: var(--bg-gradient);
+    transition: 0.5s ease;
+
+}
+.navStyle:hover {
+    background: var(--bg-gradient-reverse);
+    transition: 0.5s ease;
+}
+
+.nav-item a{
+    color: var(--bg-light);
+}
+
+.dropdown-menu{
+    background: var(--bg-gradient-reverse);
+}
+
+.helloUser{
+  font-family: "Teachers", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.2em;
+  font-size: 1.1em;
+  color: var(--bg-light);
+  text-shadow: 0px 0px 1px white;
+  margin: 2% 10%;
+}
+
+.NavlinkStyle{
+    text-align: left;
+    margin: 10px;
+    padding: 10px 5px;
+    transition: 0.5s ease;
+}
+.NavlinkStyle::before{
+    content:'|';
+    color: white;
+    padding-right: 5px;
+}
+.NavlinkStyle:hover{
+    background: var(--bg-gradient-reverse);
+    color: white;
+    transition: 0.5s ease;
+}
+
+.mobileLogOff{
+    display:none;
+}
+
+.footerStyle {
+    background-color: var(--bg-gradient-base-reverse);
+    background: var(--bg-gradient-reverse);
+    color: var(--bg-light);
+    font-size: 10px;
+}
+
+.lightFont {
+    color: var(--bg-light);
+}
+
+.blueFont {
+    color: var(--bg-darkblue);
+}
+
+.orangeFont {
+    color: var(--bg-orange);
+}
+
+.lightGreyBg {
+    background-color: var(--bg-light-grey);
+}
+
+.btnGrey {
+    background-color: var(--bg-grey);
+    padding: 10px 20px;
+    margin-right: 5%;
+    margin-top: 5%;
+    box-shadow: 1px 1px 2px grey;
+}
+
+.btnGrey {
+    background-color: var(--bg-grey);
+    border: 2px solid var(--bg-grey);
+    padding: 10px 20px;
+    margin-right: 5%;
+    margin-top: 5%;
+    box-shadow: 1px 1px 3px grey;
+}
+
+.btnGrey:hover {
+    border: 2px solid var(--bg-grey);
+    box-shadow: none;
+}
+
+.navOverlap {
+    height: 60px;
+}
+.accordionTitle{
+    font-family: "Teachers", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+.btnOrange {
+    background-color: var(--bg-orange);
+    border: 2px solid var(--bg-orange);
+    color: var(--bg-light);
+    font-family: var(--main-font);
+    font-weight: bold;
+    padding: 10px 20px;
+    margin-right: 5%;
+    margin-top: 5%;
+    box-shadow: 1px 1px 3px grey;
+}
+
+.btnOrange:hover {
+    border: 2px solid var(--bg-orange);
+    color: var(--bg-orange);
+    box-shadow: none;
+}
+
+.btnBleu {
+    background-color: #0064A3;
+    color: #f4f4f4;
+}
+
+.error{
+    margin-top: 0px;
+    font-size: .75rem;
+    color: red;
+    margin-bottom: 10px;
+}
+
+.inscriptionSuccess{
+    color: green;
+    font-size: 1.2em;
+    line-height: 1.1em;
+    text-align: center;
+}
+
+/* aspect des badges bleus */
+.text-bg-darkblue {
+    color: var(--bg-light);
+    background-color: var(--bg-darkblue);
+}
+
+/* aspect du dropdown de la FAQ */
+
+.accordion-button:not(.collapsed) {
+    color: var(--bg-black);
+    background-color: var(--bg-orange);
+}
+
+.accordion-button {
+    color: var(--bg-black);
+    background-color: var(--bg-orange-light);
+}
+
+/*position des images*/
+.imgCover {
+    object-fit: cover;
+    height: 200px;
+}
+
+#img-container {
+    display: flex;
+    justify-content: center;
+}
+
+#mainImg {
+    width: auto;
+}
+
+  
+/**************************** VERSION MOBILE ********************************/
+
+@media screen and (min-width: 300px) and (max-width: 768px) {
+    .dispNoneMob {
+        display: none;
+    }
+    .imgCover {
+        object-fit: cover;
+        height: 140px;
+    }
+
+    h1 {
+        font-size: 4vh;
+    }
+
+    h6 {
+        font-size: 1em;
+    }
+
+    .navtext{
+        font-size: 1em;
+    }
+    .mobileLogOn{
+        display:none;
+    }
+    .mobileLogOff{
+        display:block;
+    }
+
+}
+
+@media(max-width:999px) {
+    .navOverlap {
+        height: 150px;
+    }
+}

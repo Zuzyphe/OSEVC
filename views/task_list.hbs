@@ -1,0 +1,77 @@
+<div class="container-fluid">
+    <div class="row">
+        <h2 class="mt-4 mb-4">Liste des tâches à réaliser</h2>
+    </div>
+    <div class="row flex-row d-flex justify-content-center">
+        {{#each tasks}}
+        <div class="col-sm-12 col-md-4 col-lg-3 mx-auto mt-2 mb-2">
+            <div class="card">
+                <div class="card-header">
+                    <small>
+                        <div class="badge text-bg-warning float-end ms-2">
+                            <i class="bi bi-person-plus-fill"></i>
+                            <span>{{player_number}} participants</span>
+                            <span>Créé par{{task.prenom}}</span>
+                        </div>
+                    </small>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title mt-1">{{task_name}}</h5>
+                    <p class="card-text">{{task_desc}}</p><br><br>
+                    
+                    <a href="/task/page/{{id}}" class="btn btnOrange m-2 float-end">Voir les détails</a>
+
+                </div>
+                
+                <div class="card-header">{{!-- integration du jeu et sa page ou sa modale --}}
+                    <a href="#" class="card-link">Urgent oui/non</a>
+                </div>
+                
+                {{#if @root.isAdmin}} 
+                <div class="row ">{{!-- ligne interne avec les 2 boutons admins--}}
+                    <div class="col-md-6">
+
+                        <a href="/task/update/{{id}}" class="btn btn-outline-warning m-1"> modifier
+                            la tâche</a>
+                    </div>
+
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline-danger m-1" data-bs-toggle="modal"
+                            data-bs-target="#Modal{{id}}"> Supprimer la tâche</button>
+                    </div>
+                    
+
+                </div>
+                {{/if}}
+            </div>{{!-- end card --}}
+        </div>{{!-- fin de la colonne avec la carte --}}
+        {{/each}}
+    </div>
+    <div class="row">
+        {{#each tasks}}
+        {{#if @root.isAdmin}} 
+        <!-- Modal -->
+        <div class="modal fade" id="Modal{{id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation de suppression</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            Fermer</button>
+                    </div>
+                    <div class="modal-body">
+                        Êtes vous sur de vouloir supprimer ce jeu : <em> {{task_name}} ?</em></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <form action="/task/delete/{{id}}" method="post">
+                            <button type="submit" class="btn btn-danger">Supprimer définitivement</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+        {{/each}}
+        
+    </div>
+</div>

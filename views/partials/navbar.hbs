@@ -1,0 +1,102 @@
+<nav class="navbar navbar-expand-lg navStyle sticky-top mb-2">
+    <div class="container-fluid">
+        {{#if uid}}
+        <a class="navbar-brand luckiest-guy-regular" href="/personal/board/"><img src="../../pictures/picture_test.jpg"
+                width="55px"><br>oSEVC</a>
+        {{else}}
+        <a class="navbar-brand luckiest-guy-regular" href="/"><img src="../../pictures/picture_test.jpg"
+                width="55px"><br>oSEVC</a>
+        {{/if}}
+        <div class="d-flex justify-content-end flex-row">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {{#if isAdmin}}
+                <li class="nav-item">
+                    <a class="nav-link NavlinkStyle {{#if navList}}active{{/if}}" href="/activities/list">Activités</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link NavlinkStyle{{#if navHome}}active{{/if}}" aria-current="Activity list"
+                        href="/task/list/">Tâches</a>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link NavlinkStyle dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Gestion/Création
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item {{#if navEventCreate}} active {{/if}}" href="/activities/create">Créer
+                                une activité</a></li>
+                        <li><a class="dropdown-item {{#if navTaskCreate}} active {{/if}}" href="/task/create">Créer une
+                                tâche</a></li>
+                        <li><a class="dropdown-item {{#if navUserList}}active{{/if}}" href="/user/list">Voir les
+                                utilisateurs</a></li>
+                        <li><a class="dropdown-item {{#if navUserList}}active{{/if}}"
+                                href="/activities/registrated/users">Voir les inscrits</a></li>
+                        <li><a class="dropdown-item" href="/user/read/1">Gérer mon compte</a></li>
+                    </ul>
+                </li>
+                {{/if}}
+
+                {{#if prenom }}
+                <li class="nav-item">
+                        <a class="nav-link NavlinkStyle {{#if navInscription}}active{{/if}}" href="#">Créez un projet</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link NavlinkStyle {{#if navInscription}}active{{/if}}" href="#">Bloc note</a>
+                </li>
+                <li class="nav-item">
+                    {{#if uid }}                
+                    <a class="nav-link NavlinkStyle" href="/user/read/{{uid}}">Mon compte</a>
+                    
+                {{/if}}
+                </li>
+
+                {{else}}
+                <li class="nav-item">
+                    <a class="nav-link NavlinkStyle {{#if navInscription}}active{{/if}}" href="/user/register">Créez son
+                        espace</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link NavlinkStyle {{#if navInscription}}active{{/if}}" href="/user/register">Rejoindre
+                        un projet</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link NavlinkStyle{{#if navHome}}active{{/if}}" aria-current="FAQ page"
+                        href="/FAQ">FAQ</a>
+                </li>
+                {{/if}}
+                {{!-- <form class="d-flex" role="search" action="/search/results" method="post">
+                    <input class="form-control me-2" type="search" placeholder="Une activité ou un jeu" id="searchInput"
+                        name="search" aria-label="Search">
+                    <button class="btn btn-success" type="submit">Rechercher</button>
+                </form> --}}
+            </ul>
+
+        </div>
+        
+        {{#if prenom}}
+        <div class="nav-item">
+            <p class="nav-item helloUser justify-content-center LogInStyle"> Bonjour<br> <b>{{prenom}}</b></p>
+            <a class="nav-link text-danger" href="/user/logout"><span class="badge rounded-pill text-bg-danger m-2"> <i
+                        class="bi bi-box-arrow-right text-light"></i>Se déconnecter</span></a>
+        </div>
+        {{else}}
+
+        <div class="nav-item mobileLogOn LogInStyle">
+            <a class="nav-link {{#if navLogin}} active {{/if}} text-info" href="/user/login"> <span
+                    class="badge rounded-pill text-bg-success m-2"><i class="bi bi-box-arrow-right text-light"></i>Connexion</span></a>
+        </div>
+         <div class="nav-item mobileLogOff LogInStyle">
+            <a class="nav-link {{#if navLogin}} active {{/if}} text-info" href="/user/login"> <span
+                    class="badge text-bg-success m-1  navtext">Connexion</span></a>
+        </div>
+        {{/if}}
+</div>
+{{!-- fin de la div pour la nav --}}
+    </div>
+</nav>

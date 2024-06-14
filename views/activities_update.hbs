@@ -1,0 +1,59 @@
+{{!-- Est-ce qu'on donne seulement l'accès à cette page qu'à l'admin ? --}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Modifier une activité</h1>
+            <form action="/activities/update/{{activities.id}}" method="post">
+                <div class="mb-2 fs-4">
+                    <label for="activitiesName" class="form-label">Titre de l'activité</label>
+                    <input name="activitiesName" type="text" class="form-control" id="activitiesName"
+                        placeholder="Titre de l'event" value="{{activities.name_activity}}">
+                </div>
+                <div class="mb-2 fs-4">
+                    <label for="NameOrganiser" class="form-label">Nom du créateur de l'activité</label>
+                    <input name="NameOrganiser" type="text" class="form-control" id="activitiesName"
+                        placeholder="Nom de l'organisateur" value="{{activities.name_organiser}}">
+                </div>
+                <div class="form-group col-4 mt-4">
+                    <label for="taskId" class="mb-2 fs-4"><i class="bi bi-dice-5"></i> Choisissez une tâche</label>
+                    <div class="dropdown">
+                        <select id="taskId" name="taskID" class="form-select border-warning-subtle"
+                            aria-label="Default select example">
+                            {{#each tasks}}
+                            <option value="{{id}}">{{task_name}}</option>
+                            {{/each}}
+                        </select>
+                        </ul>
+                    </div>
+                </div>
+                {{!-- <div class="form-group col-4 mt-4">
+                <label for="imgActivities" class="mb-2 fs-4"><i class="bi bi-image-fill"></i> Url de l'image</label>
+                <input type="text" id="imgActivities" name="imgActivities" class="form-control border-warning-subtle" value="{{activities.imageUrl}}">
+            </div> --}}
+                <div class="mb-3">
+                    <label for="activitiesDescription" class="form-label mb-2 fs-4">Description de l'activité</label>
+                    <textarea name="activitiesDescription" class="form-control" id="activitiesDescription"
+                        rows="5">{{activities.description}}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label mb-2 fs-4">Date</label>
+                    <input name="activitiesDate" type="date" class="form-control" id="exampleFormControlInput1"
+                        placeholder="Date" value="{{activities.event_date}}">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label mb-2 fs-4">Time</label>
+                        <input name="activitiesTime" type="text" class="form-control" id="exampleFormControlInput1"
+                            placeholder="Heure" value="{{activities.event_time}}">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label mb-2 fs-4">Time</label>
+                    <input name="playersNumber" type="number" class="form-control" id="exampleFormControlInput1"
+                        placeholder="Nombre de joueur" value="{{activities.nbr_participants}}">
+                </div>
+                {{#if isOrganiser}}
+                <button type="submit" class="btn btnOrange">Modifier</button>
+                {{/if}}
+            </form>
+        </div>
+    </div>
+</div>

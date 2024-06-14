@@ -1,0 +1,117 @@
+<div class="container-fluid">
+    <div class="row flex-row d-flex justify-content-center">
+        <div class=" col-8 col-lg-8 col-md-10  mx-auto mt-5 mb-2">
+
+            {{!-- integration de l'image en correspondance du jeu
+
+                <img src="" alt="">
+
+                
+                <div class="panel-body mt-4 row">
+                    <img src="{{activities.imageUrl}}" class="card-img-top imgCover" alt="image du jeu">
+                </div>--}}
+            <div class="card border-0">
+                <img src="{{ activities.imageUrl}}" class="card-img-top imgCover" alt="ActivityImg" />
+                <div class="card-header">
+                    <small>
+                        <div class="rounded-pill badge text-bg-primary ms-2">
+                            <i class="bi bi-person-plus-fill"></i>
+                            <span aria-label='Créé le {{moment activities.createdAt format="DD/MM/YYYY"}}'>
+                                Créé le {{moment activities.createdAt format="DD/MM/YYYY HH:mm"}}
+                            </span>
+                        </div>
+                    </small>
+                    <small>
+                        <div class="rounded-pill badge text-bg-warning float-end ms-2">
+                            <i class="bi bi-person-plus-fill"></i>
+                            <span
+                                class="text-danger">{{availablePlaces}}</b></span>/<b>{{activities.nbr_participants}}participants</span>
+                        </div>
+                    </small>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title mt-1 fw-semibold fs-2 text-center mb-4">{{activities.name_activity}}</h5>
+                    <p class="card-text fw-medium">{{activities.description_activity}}</p><br><br>
+                    <p class="card-text fw-semibold"><em> Date : {{activities.activity_date}} à {{activities.event_time}}</em></p>
+                </div>
+                <div class="d-flex justify-content-center m-2">
+                    <form action="/activities/{{activities.id}}/register" method="post">
+                        <button type="submit" class="btn btnOrange" aria-label="S'inscrire">S'inscrire
+                        </button>
+                    </form>
+                </div>
+                {{!-- intégrer le concept de tâche urgente ou non  --}}
+                <div class="card-body">{{!-- integration du jeu et sa page ou sa modale --}}
+                    <a href="/task/page/{{id}}" class="card-link"> jeu joué : {{activities.task.name}}</a>
+                </div>
+                {{#if isAdmin}}
+                <div class="row">
+                    <div class="col d-flex align-items-center justify-content-center">
+                        <a href="/activities/{{activities.id}}" type="button" class="btn btn-outline-warning m-2 "
+                            data-bs-toggle="modal" data-bs-target="#ModalEventModif{{activities.id}}"> Modifier
+                            l'activité</a>
+                        <button type="button" class="btn btn-outline-danger m-2" data-bs-toggle="modal"
+                            data-bs-target="#ModalEventSupp{{activities.id}}"> Supprimer l'activité</button>
+                    </div>
+                </div>
+                {{/if}}
+            </div>{{!-- end card --}}
+        </div>{{!-- fin de la colonne avec la carte --}}
+        {{!-- pop up pour modifier --}}
+        <div class="modal fade" id="ModalEventModif{{activities.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Modifier l'activité</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/activities/update/{{activities.id}}" method="post">
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Titre</label>
+                                <input name="activitiesName" type="text" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="name" value="{{activities.name_activity}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                                <textarea name="activitiesDescription" class="form-control" id="exampleFormControlTextarea1"
+                                    rows="3">{{activities.description_activity}}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Date</label>
+                                <input name="activitiesDate" type="date" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="Date" value="{{activities.activity_date}}">
+                                <label for="exampleFormControlInput1" class="form-label">Time</label>
+                                <input name="activitiesTime" type="text" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="Heure" value="{{activities.activity_time}}">
+                                <label for="exampleFormControlInput1" class="form-label">Nombre de
+                                    participants</label>
+                                <input name="playersNumber" type="number" class="form-control"
+                                    id="exampleFormControlInput1" placeholder="Nombre de joueurs"
+                                    value="{{activities.nbr_participants}}">
+                            </div>
+                            <button type="submit" class="btn btn-warning">Modifier</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{!-- fin pop up Modif --}}
+        {{!-- pop up pour supprimer --}}
+        <div class="modal fade" id="ModalEventSupp{{activities.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="/activities/delete/{{activities.id}}" method="post">
+                        <div class="modal-header">
+                            <h4>Êtes-vous sûr de vouloir supprimer ?</h4>
+                        </div>
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,79 @@
+<div class="container-fluid">
+  <div class="row">
+    <h2>Mon compte</h2>
+  </div>
+
+  {{!-- PROFILE MANAGEMENT --}}
+
+  <div class="row mt-5">
+    <div class="col-2"></div>
+    <div class="col-2 ">
+      <img src="/pictures/profile_confettis.png" alt="" class="col-12">
+    </div>
+    <div class="col-6">
+      <div class="row">
+        {{!-- FIRST MODAL OPENING --}}
+        {{!-- <button type="button" data-bs-toggle="modal" data-bs-target="#prenomModal"
+          class="col-lg-1 col-md-2 col-sm-3 col-4 d-inline btn btn-outline-primary btnBleu">
+          <i class="bi bi-pencil-square"></i>
+        </button> --}}
+        <h3 class="text-start">Prénom : {{account.dataValues.member_firstname}}</h3>
+      </div>
+      <div class="row">
+        {{!-- SECOND MODAL OPENING --}}
+        {{!-- <button type="button" data-bs-toggle="modal" data-bs-target="#nomModal"
+          class="col-lg-1 col-md-2 col-sm-3 col-4 d-inline btn btn-outline-primary btnBleu">
+          <i class="bi bi-pencil-square"></i>
+        </button> --}}
+        <h3 class="text-start">Nom : {{account.dataValues.member_name}}</h3>
+      </div>
+      <div class="row">
+        {{!-- THIRD MODAL OPENING --}}
+        {{!-- <button type="button" data-bs-toggle="modal" data-bs-target="#mailModal"
+          class="col-lg-1 col-md-2 col-sm-3 col-4 d-inline btn btn-outline-primary btnBleu">
+          <i class="bi bi-pencil-square"></i>
+        </button> --}}
+        <h3 class="text-start">Mail : {{account.dataValues.member_email}}</h3>
+      </div>
+      <a href="/user/update/{{account.dataValues.id}}" class="col btn btnOrange">
+        <h5>Modifier mon compte <i class="bi bi-pencil-square"></i></h5>
+      </a>
+    </div>
+    <div class="col-2"></div>
+
+  </div>
+
+  {{!-- Activities --}}
+
+  <div class="row py-5">
+    <div class="col-2"></div>
+    <div class="col-8">
+    <h3>Activités associées</h3>
+    {{#each account.dataValues.activities}}
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-9">
+      <div class="card border-success">
+        <div class="card-body">
+          <h5 class="card-title"><i class="bi bi-dice-2"></i> {{dataValues.name_activity}} <i class="bi bi-dice-2"></i>
+          </h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary"><i class="bi bi-calendar-date"></i> {{moment
+            dataValues.event_date format="DD/MM/YYYY"}} à {{dataValues.event_time}}</h6>
+          <div class="card-body row">
+            <img src="/pictures/picture_test.jpg" alt="logo du jeu" class="col-6 mb-2 rounded float-start">
+            <p class="card-text col-6">{{dataValues.description}}</p>
+          </div>
+
+          <a href="/user/unregister/{{@root.account.dataValues.id}}/{{dataValues.id}}"
+            class="card-link btn btn-danger rounded-pill">Se désincrire</a>
+          <a href="#" class="card-link btn btn-success rounded-pill">Voir l'évènement</a>
+          {{!-- POSSIBLY ADD VISUAL INDICATIONS FOR ALARM TOGGLE --}}
+          {{!-- <button type="button" data-bs-toggle="modal" data-bs-target="#alarmModal"
+            class="card-link btn btn-warning rounded-pill"><i class="bi bi-alarm"></i>Ajouter un
+            rappel</button> --}}
+        </div>
+      </div>
+    </div>
+    {{/each}}
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>

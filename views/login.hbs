@@ -1,0 +1,36 @@
+<H1 class="text-center">Connexion</H1>
+{{#if message}}
+<div class="row">
+    <div class="col-8 mx-auto">
+        <p class="inscriptionSuccess">{{message}}</p>
+    </div>
+</div>
+{{/if}}
+<div class="row my-5">
+    <div class="col-6 mx-auto">
+        <form action="/user/login" method="post" onsubmit="return loginCheck()">
+            {{#if errors}}
+            <div class="mb-3">
+                {{#each errors}}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{msg}} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {{/each}}
+            </div>
+            {{/if}}
+            <div class="mb-3">
+                <label for="email" class="form-label">Rentrer votre adresse email</label>
+                <input name="email" type="email" class="form-control" id="email" placeholder="nom@exemple.fr">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Rentrer votre mot de passe</label>
+                <input name="password" type="password" class="form-control" id="password">
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-outline-success" type="submit">Se connecter</button>
+            </div>
+        </form>
+        <span> Pas encore inscris ? <a href="/user/register"> Inscris-toi</a></span>
+    </div>
+</div>
+<script src="/js/loginCheck.js" defer></script>
