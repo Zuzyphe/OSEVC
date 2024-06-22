@@ -1,12 +1,9 @@
 <nav class="navbar navbar-expand-lg navStyle sticky-top mb-2">
     <div class="container-fluid">
-        {{#if uid}}
-        <a class="navbar-brand luckiest-guy-regular" href="/personal/board/"><img src="../../pictures/picture_test.jpg"
-                width="55px"><br>oSEVC</a>
-        {{else}}
-        <a class="navbar-brand luckiest-guy-regular" href="/"><img src="../../pictures/picture_test.jpg"
-                width="55px"><br>oSEVC</a>
-        {{/if}}
+   
+        <a class="navbar-brand luckiest-guy-regular d-flex flex-column text-center" href="/"><img src="../../pictures/logo-osevc-white2.png"
+                id="logoPic"></a>
+
         <div class="d-flex justify-content-end flex-row">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +26,7 @@
                         Gestion/Création
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item {{#if navEventCreate}} active {{/if}}" href="/activities/create">Créer
+                        <li><a class="dropdown-item {{#if navActivitiesCreate}} active {{/if}}" href="/activities/create">Créer
                                 une activité</a></li>
                         <li><a class="dropdown-item {{#if navTaskCreate}} active {{/if}}" href="/task/create">Créer une
                                 tâche</a></li>
@@ -44,7 +41,7 @@
 
                 {{#if prenom }}
                 <li class="nav-item">
-                        <a class="nav-link NavlinkStyle {{#if navInscription}}active{{/if}}" href="#">Créez un projet</a>
+                        <a class="nav-link NavlinkStyle {{#if navEventCreate}}active{{/if}}" href="/event/create">Créez un projet</a>
                 </li>
                 <li class="nav-item">
                         <a class="nav-link NavlinkStyle {{#if navInscription}}active{{/if}}" href="#">Bloc note</a>
@@ -58,11 +55,11 @@
 
                 {{else}}
                 <li class="nav-item">
-                    <a class="nav-link NavlinkStyle {{#if navInscription}}active{{/if}}" href="/user/register">Créez son
+                    <a class="nav-link NavlinkStyle {{#if navInscription}}active{{/if}}" href="/user/register">Créer son
                         espace</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link NavlinkStyle {{#if navInscription}}active{{/if}}" href="/user/register">Rejoindre
+                    <a class="nav-link NavlinkStyle {{#if navJoin}}active{{/if}}" href="#">Rejoindre
                         un projet</a>
                 </li>
                 <li class="nav-item">

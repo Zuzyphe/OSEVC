@@ -31,15 +31,14 @@ module.exports = {
             return res.render('user_create', { errors: errors.array() }, { hasAcceptedPrivacyPolicy });
         }
         // Application du trim sur les valeurs des champs
-        
-        
+
         const prenom = req.body.prenom.trim();
         const nom = req.body.nom.trim()
         const email = req.body.email.trim();
         const password = req.body.password;
         const confidentiality = req.body.confidentiality;
 
-        
+
         const user = await User.findOne({
             where: {
                 [Op.or]: [
@@ -72,13 +71,13 @@ module.exports = {
             // include: [{
             //     model: Event,
             // }],
-                        
+
         });
 
         // console.log(account);
         // console.log(req.session);
         req.session.uid = account.id;
-        
+
         res.render('my_account', { account })
     },
     getLogin: async (req, res) => { // <---- Donne la page de connexion ---->
@@ -113,7 +112,7 @@ module.exports = {
                     req.session.isAdmin = user.isAdmin
                     req.session.isOrganiser = user.isOrganiser
                     req.session.isParticipant = user.isParticipant
-                    //répeter pour chaque role
+
                     console.log(req.session);
 
                     if (user.isAdmin) {
@@ -125,7 +124,7 @@ module.exports = {
                     if (user.isParticipant) {
                         req.session.isParticipant = true
                     }
-                    
+
                     res.redirect('/user/personal_board')
                 }
             })
@@ -154,7 +153,66 @@ module.exports = {
         res.redirect('/')
     },
     update: async (req, res) => {
-        const user = await User.findByPk(req.params.id, { raw: true })
-        res.render("user_create", { user })
+        try {
+            const user = await User.findByPk(req.params.id, { raw: true });
+            if (user) {
+
+                res.render('user_create', { user }); // Passe l'utilisateur au template
+
+
+            } else {
+                res.status(404).send('Utilisateur non trouvé');
+            }
+        } catch (error) {
+            res.status(500).send('Erreur interne du serveur');
+        }
+    },
+    updatePost: async (req, res) => {
+        // Get the user's ID from the request parameters
+        const userId = req.params.id;
+
+        // Find the user by their ID
+        User.findByPk(userId)
+            .then(user => {
+                if (!user) {
+                    // User not found, return an error
+                    return res.status(404).json({ message: 'User not found' });
+                }
+
+                // Get the new information from the input fields
+                const { prenom, nom, email, password } = req.body;
+
+                // Update the user's information
+                user.member_firstname = prenom;
+                user.member_name = nom;
+                user.member_email = email;
+                user.password = password;
+
+                // Save the changes
+                user.save()
+                    .then(updatedUser => {
+                        res.json(updatedUser);
+                    })
+                    .catch(error => {
+                        res.status(500).json({ message: error.message });
+                    });
+            })
+            .catch(error => {
+                res.status(500).json({ message: error.message });
+            });
+
+        req.flash('success', 'Votre compte a été mis à jour avec succès.');
+        res.render('/user_read/:id')
+    },
+    getRoleOrganisateur: async (req, res) => {
+
+        const user = await User.findByPk(req.params.id, { raw: true });
+        if (user) {
+
+            res.render('user_create', { user }); // Passe l'utilisateur au template
+
+
+        }
     }
+
 }

@@ -26,9 +26,9 @@ module.exports = {
     },
 
     createActivities: async (req, res) => { // <---- fonction affichage de la page activités ---->
-        const navEventCreate = true
+        const navActivitiesCreate = true
         const tasks = await Task.findAll({raw:true})
-        res.render('activities_create', { navEventCreate, tasks })
+        res.render('activities_create', { navActivitiesCreate, tasks })
     },
 
     postActivities: async (req, res) => { // <---- fonction de création d'event ---->
@@ -39,43 +39,41 @@ module.exports = {
             }
             const activity = await Activity.findOne({
                 where: {
-                    name: req.body.activitiesName.trim(),
-                    event_time: req.body.activitiesTime,
-                    event_date: req.body.activitiesDate,
-                    event_address: req.body.address,
-                    imageUrl: req.body.imgTask
+                    name_activity: req.body.activitiesName.trim(),
+                    activity_time: req.body.activitiesTime,
+                    activity_date: req.body.activitiesDate,
+                    activity_address: req.body.address,
                 }
             });
 
             console.log("Correspondance trouvé :", activity); // log affichage de la correspondance
 
             if (activity !== null) {
-                const error = "Cet événement existe déjà";
+                const error = "Cette activité existe déjà";
                 return res.render('activities_create', { error: error });
             } else {
                 // console.log(req.body.activitiesDate)
-                const eventcreated = await Activity.create({
+                const activitycreated = await Activity.create({
                     name_activity: req.body.activitiesName.trim(),
                     description_activity: req.body.activitiesDescription.trim(),
-                    event_date: req.body.activitiesDate,
-                    event_time: req.body.activitiesTime,
+                    activity_date: req.body.activitiesDate,
+                    activity_time: req.body.activitiesTime,
                     nbr_participants: req.body.playersNumber,
                     activity_address: req.body.address,
-                    name_organiser: req.body.NameOrganiser.trim(),
+                    // name_organiser: req.body.NameOrganiser.trim(),
                     taskId: req.body.taskID,
-                    imageUrl: req.body.imgtask
                 });
-                console.log("Activité créée :", eventcreated); // log confirmation de la création d'un évenement 
+                console.log("Activité créée :", activitycreated); // log confirmation de la création d'un évenement 
                 return res.redirect('/activities/list');
             }
         } catch (error) {
             console.error("Erreur lors de la création de l'activité :", error);
-            return res.status(500).send("Une erreur est survenue lors de la création de l'événement.");
+            return res.status(500).send("Une erreur est survenue lors de la création de l'activité.");
         }
 
     },
     read: async (req, res) => { //<---- fonction pour lire l'event via l'ID ---->
-        const navEvent = true;
+        const navActivity = true;
         // try {
 
         console.log("ID de l'activité à rechercher :", req.params.id); // log pour afficher l'ID
@@ -86,7 +84,7 @@ module.exports = {
             },
         });
         if (!activity) {
-            return res.status(404).send("L'événement n'a pas été trouvé.");
+            return res.status(404).send("L'activité n'a pas été trouvée.");
         } else {
             activity = activity.toJSON();
             // Appel à la fonction getAvailablePlaces pour obtenir le nombre de places restantes
@@ -94,10 +92,10 @@ module.exports = {
             const result = validationResult(req);
 
             if (!result.isEmpty()) {
-                return res.render('eactivities_read', { activity, navEvent, errors: result.errors });
+                return res.render('activities_read', { activity, navActivity, errors: result.errors });
             } else {
                 console.log(activity)
-                res.render('activities_read', { activity, navEvent, availablePlaces });
+                res.render('activities_read', { activity, navActivity, availablePlaces });
             }
         }
         // } catch (error) {
@@ -165,7 +163,7 @@ module.exports = {
                     return res.render('activities_read', {activity, availablePlaces, message: "Vous êtes déjà inscrit à cette activité." });
                 } else {
                     // Inscrire l'utilisateur à l'événement
-                    await ActivityUser.create({
+                    await Activity.create({
                         activityId: activityId,
                         userId: userId
                     });
@@ -197,10 +195,9 @@ module.exports = {
             const [updatedRowsCount, updatedRows] = await Activity.update({
                 name_activity: req.body.activitiesName,
                 description_activity: req.body.activitiesDescription,
-                event_date: req.body.activitiesDate,
-                event_time: req.body.eventTime,
+                Activity_date: req.body.activitiesDate,
+                Activity_time: req.body.activitiesTime,
                 nbr_participants: req.body.playersNumber,
-                imageUrl: req.body.imgTask
             }, {
                 where: {
                     id: req.params.id
@@ -244,12 +241,12 @@ module.exports = {
     },
     deleteRegistratedUsers: async(req,res)=>{ //<----- fonction pour supprimer l'utilisateur inscris à un event ---->
         
-        await ActivityUser.destroy( { where: {
+        await Activity.destroy( { where: {
             [Op.and]: [
                 { userId: req.params.userId },
                 { activityId: req.params.activityId }
             ]
         } } )
         res.redirect('/activities/registrated/users')
-    } ,
+    }
 }

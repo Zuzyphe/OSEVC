@@ -3,7 +3,7 @@ function taskCheck(){
     const taskName = document.getElementById('taskName').value.trim();
     const taskDescription = document.getElementById('taskDescription').value.trim();
     const participantNumber = document.getElementById('playerNumber').value;
-    const imgUrl = document.getElementById('imgTask').value.trim();
+    const imgUrl = document.getElementById('imgActivity').value.trim();
 
 
 

@@ -4,6 +4,7 @@ const homeController = require('../api/controllers/homeController')
 const userController = require('../api/controllers/userController')
 const taskController = require('./controllers/taskController')
 const activityController = require('./controllers/activitiesController')
+const eventController = require('./controllers/eventController')
 // const searchController = require('./controllers/searchController')
 const personalboardController = require('./controllers/personalboardController')
 const { body, param } = require('express-validator')
@@ -20,12 +21,23 @@ const authenticateUser = require('./middleware/authenticateUser')
 
 router.route('/')
     .get(homeController.get)
-    
-// //<-----------  Personal Board Routes   ----------->
 
-// router.route('/personal/board')
-//     .get(personalboardController.get)
-    
+//<-----------  Events Routes   ----------->
+router.route('event_create')
+    .get(eventController.eventCreate)
+
+router.route('event_read')
+    .get(eventController.eventGet)
+
+router.route('/event/read/:id')
+    .get([
+        param('id').exists().withMessage("L'identifiant de l'événement est requis.")
+    ], eventController.readEvent)
+
+// //<-----------  Roles Routes   ----------->
+
+// router.route('/user/personal/board/:userId')
+//     .post (userController.postRole)
 
 //<-----------  User Routes   ----------->
 
@@ -69,19 +81,23 @@ router.route('/user/login')
         body('password')
             .notEmpty().withMessage('Le mot de passe invalide')
             .trim()
-    ,userController.postLogin)
+        , userController.postLogin)
 
 router.route('/user/logout')
     .get(userController.logout)
 
 router.route('/user/read/:id')
     .get(userController.getAccount)
+    .post(userController.updatePost)
 
 router.route('/user/unregister/:userId/:eventId')
     .get(userController.removeregister)
 
 router.route('/user/update/:id')
-.get(userController.update)
+    .get(userController.update)
+    
+
+//a vérifier
 
 router.route('/user/delete/:id')
 
@@ -89,12 +105,12 @@ router.route('/user/list')
     .get(userController.list)
 
 router.route('/user/inscription/success')
-        .post(userController.post)
+    .post(userController.post)
 
 
 //<---------  Personal Board Routes   ----------->
 router.route('/user/personal_board')
-   .get(personalboardController.personalBoard);
+    .get(personalboardController.personalBoard);
 
 //<---------  Tasks Routes   ----------->
 
@@ -238,7 +254,7 @@ router.route('/activities/:id/register')
     .post(authMW, activityController.registerUserToActivities)
 
 
-    router.route('/activities/registrated/users')
+router.route('/activities/registrated/users')
     .get(activityController.getRegistratedUsers)
 router.route('/activities/:eventId/user/:userId/delete')
     .post(activityController.deleteRegistratedUsers)
