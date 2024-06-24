@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize')
 const config = require('../../config')
+const User = require('./eventMembersModel')
 
 const Event = config.sequelize.define('eventEVC', {
     id: {
@@ -29,9 +30,13 @@ const Event = config.sequelize.define('eventEVC', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    name_organiser: {
-        type: DataTypes.STRING,
-        allowNull: false
+    userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references:{
+            model:User,
+            key: 'id'
+        }
     },
     imageUrl: {
         type: DataTypes.STRING,

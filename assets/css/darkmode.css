@@ -4,10 +4,10 @@
     --bg-light: #F8F8F8;
     --bg-light-grey: #565656;
     --bg-grey: #c3c3c3;
-    --bg-bordeaux: #ac3448;
+    --bg-bordeaux: #646464;
     --bg-bordeaux-light: #84787abc;
     --bg-darkblue: #606569;
-    --bg-darkred: #A30000;
+    --bg-darkred: #aba9a9;
     --bg-green: #5CD451;
     --bg-darkgrey: #444444;
     --title-font: "Luckiest Guy", cursive;
@@ -42,6 +42,19 @@ body {
     background-color: var(--bg-darkgrey);
     color: #fff;
 }
+
+#toggleButton{
+    display: block;
+    position:fixed;
+    top: 20%;
+    right: 5px;
+    cursor: pointer;
+
+}
+#toggleButton img{
+    width: 80px;
+}
+
 
 h1 {
     font-family: "Luckiest Guy", cursive;

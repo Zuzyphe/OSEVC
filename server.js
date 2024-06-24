@@ -25,8 +25,8 @@ const Task = require('./api/models/taskModel');
 const EventLists = require("./api/models/eventListsModel");
 
 //definition of the relations between the tables
+User.hasMany(Event,{foreignKey: 'userId'});
 Event.hasMany(Activity);
-User.belongsTo(Event);
 Activity.hasMany(Task);
 Task.belongsTo(Activity);
 Task.belongsToMany(User, { through: 'TaskUser' });
@@ -167,4 +167,3 @@ app.use('/', router)
 app.listen(port, () => {
     console.log(`Example app listening at 127.0.0.1:${port}`)
 })
-

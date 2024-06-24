@@ -1,4 +1,4 @@
-const { Op } = require('sequelize');
+const { Op, where } = require('sequelize');
 const bcrypt = require("bcrypt");
 const { validationResult } = require('express-validator');
 const { Request, Response } = require('express');
@@ -58,7 +58,8 @@ module.exports = {
                 member_name: nom,
                 member_email: email,
                 password: password,
-                confidentiality: confidentiality
+                confidentiality: confidentiality,
+                
             })
             req.flash('success', 'Votre compte a bien été créé, vous pouvez maintenant vous connecter avec vos identifiants.');
             res.redirect('login')
@@ -166,6 +167,7 @@ module.exports = {
         } catch (error) {
             res.status(500).send('Erreur interne du serveur');
         }
+        
     },
     updatePost: async (req, res) => {
         // Get the user's ID from the request parameters
@@ -190,29 +192,36 @@ module.exports = {
 
                 // Save the changes
                 user.save()
-                    .then(updatedUser => {
-                        res.json(updatedUser);
-                    })
-                    .catch(error => {
-                        res.status(500).json({ message: error.message });
-                    });
+                    // .then(updatedUser => {
+                    //     // res.json(updatedUser);
+                    // })
+                    // .catch(error => {
+                    //     res.status(500).json({ message: error.message });
+                    // });
             })
             .catch(error => {
                 res.status(500).json({ message: error.message });
             });
 
         req.flash('success', 'Votre compte a été mis à jour avec succès.');
-        res.render('/user_read/:id')
-    },
+        res.redirect('back');
+    }
+    
+    ,
     getRoleOrganisateur: async (req, res) => {
 
-        const user = await User.findByPk(req.params.id, { raw: true });
-        if (user) {
+        const user = await Event.findAll({
+            where: {
+                userId: 1
+            }, raw: true
+        });
+        // if (user) {
 
-            res.render('user_create', { user }); // Passe l'utilisateur au template
+        //     res.render('user_create', { user }); // Passe l'utilisateur au template
 
 
-        }
-    }
+        // }
+        console.log('usssss', user);
+    }    
 
 }

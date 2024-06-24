@@ -23,11 +23,11 @@ router.route('/')
     .get(homeController.get)
 
 //<-----------  Events Routes   ----------->
-router.route('event_create')
+router.route('/event/create')
     .get(eventController.eventCreate)
 
-router.route('event_read')
-    .get(eventController.eventGet)
+router.route('/event/create')
+    .post(eventController.postEvent)
 
 router.route('/event/read/:id')
     .get([
@@ -38,6 +38,9 @@ router.route('/event/read/:id')
 
 // router.route('/user/personal/board/:userId')
 //     .post (userController.postRole)
+router.route("/test")
+    .get(userController.getRoleOrganisateur)
+
 
 //<-----------  User Routes   ----------->
 
@@ -88,13 +91,13 @@ router.route('/user/logout')
 
 router.route('/user/read/:id')
     .get(userController.getAccount)
-    .post(userController.updatePost)
 
 router.route('/user/unregister/:userId/:eventId')
     .get(userController.removeregister)
 
 router.route('/user/update/:id')
     .get(userController.update)
+    .post(userController.updatePost)
     
 
 //a vérifier

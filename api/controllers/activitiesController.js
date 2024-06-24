@@ -60,7 +60,7 @@ module.exports = {
                     activity_time: req.body.activitiesTime,
                     nbr_participants: req.body.playersNumber,
                     activity_address: req.body.address,
-                    // name_organiser: req.body.NameOrganiser.trim(),
+                    userId: req.body.NameOrganiser.trim(),
                     taskId: req.body.taskID,
                 });
                 console.log("Activité créée :", activitycreated); // log confirmation de la création d'un évenement 

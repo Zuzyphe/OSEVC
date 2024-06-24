@@ -41,7 +41,7 @@ const User = config.sequelize.define('eventMembers', {
     confidentiality: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
-    }
+    },
 }, {
     hooks: {
         beforeCreate: (User) => {

@@ -46,6 +46,13 @@
                 <li class="nav-item">
                         <a class="nav-link NavlinkStyle {{#if navInscription}}active{{/if}}" href="#">Bloc note</a>
                 </li>
+                </li>
+                {{#if uid }} 
+                <li class="nav-item">
+                        <a class="nav-link NavlinkStyle" href="/user/personal_board">Tableau de bord</a>
+                </li>
+                {{/if}}
+
                 <li class="nav-item">
                     {{#if uid }}                
                     <a class="nav-link NavlinkStyle" href="/user/read/{{uid}}">Mon compte</a>

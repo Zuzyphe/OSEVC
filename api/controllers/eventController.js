@@ -1,13 +1,14 @@
 const { Op } = require('sequelize')
+const Event = require('../models/eventEVCModel')
 const User = require('../models/eventMembersModel')
 const Activity = require('../models/activitiesModel')
+const { validationResult } = require('express-validator')
 
 module.exports = {
 
   eventCreate: async (req, res) => {  // <---- Donne la page d'inscription ---->
     const navEventCreate = true
-    const Activity = await Activity.findAll({ raw: true })
-    res.render('event_create', { navEventCreate, Activity })
+    res.render('event_create', { navEventCreate })
 
 
   },
@@ -15,33 +16,31 @@ module.exports = {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.render('activities_create', { errors: errors.array() });
+        return res.render('event_create', { errors: errors.array() });
       }
-      const activity = await Activity.findOne({
+      const event = await Event.findOne({
         where: {
-          id: req.body.eventID,
+          // id: req.body.eventID,
           name: req.body.eventName.trim(),
           event_time: req.body.eventTime,
           event_date: req.body.eventDate,
-          name_organiser: req.body.organiserName.trim()
+          userId: req.body.NameOrganiser
         }
       });
 
-      console.log("Correspondance trouvé :", activity); // log affichage de la correspondance
+      console.log("Correspondance trouvé :", event); // log affichage de la correspondance
 
-      if (activity !== null) {
+      if (event !== null) {
         const error = "Cet événement existe déjà";
         return res.render('event_create', { error: error });
       } else {
-        // console.log(req.body.eventName)
         const eventcreated = await Event.create({
           name: req.body.eventName.trim(),
           description: req.body.eventDescription.trim(),
           event_time: req.body.eventTime,
           event_date: req.body.eventDate,
           nbr_participants: req.body.eventParticipantsNbr,
-          event_address: req.body.event_address.trim(),
-          name_organiser: req.body.organiserName.trim(),
+          event_address: req.body.eventAddress.trim(),
           imageUrl: req.body.imgEvent
         });
         console.log("Évènement créé :", eventcreated); // log confirmation de la création d'un évenement 
@@ -58,7 +57,7 @@ module.exports = {
 
     console.log("ID de l'évènement à rechercher :", req.params.id); // log pour afficher l'ID
 
-    let event = await Activity.findByPk(req.params.id, {
+    let event = await Event.findByPk(req.params.id, {
       include: [
         { model: Activity },
         { model: User }
